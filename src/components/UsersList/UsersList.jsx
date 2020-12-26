@@ -16,7 +16,6 @@ export const Users = () => {
     dispatch(loadUsersThunk());
   }, [dispatch])
 
-  console.log(users);
   return (
     <section className="users-page">
       {loading ? (
