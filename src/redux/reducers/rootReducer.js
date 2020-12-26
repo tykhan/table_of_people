@@ -4,7 +4,6 @@ import { loadingReducer } from './loadingReducer';
 import { usersReducer } from './usersReducer';
 import { postCommentsReducer } from './postCommentsReducer';
 import { postsReducer } from './postsReducer';
-import { } from '../../_variables/constants';
 
 export const rootReducer = combineReducers({
   users: usersReducer,
@@ -14,7 +13,8 @@ export const rootReducer = combineReducers({
 });
 
 export const selectors = {
-  getUsers: state => state.users.users,
   getLoading: state => state.loading,
+  getUsers: state => state.users.users,
+  getPosts: state => state.posts.posts,
   getPostComments: state => state.loaing
 }

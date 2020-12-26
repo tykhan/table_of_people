@@ -17,7 +17,6 @@ export const loadUsersThunk = () => async (dispatch) => {
   dispatch(loadingActions.startLoading());
   try {
     const users = await api.getUsers();
-    console.log(users);
     dispatch(usersLoadSuccess(users));
   } catch (error) {
     dispatch(usersLoadError(error));
