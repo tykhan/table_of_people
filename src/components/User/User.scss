@@ -1,4 +1,5 @@
 .users__table {
+  margin-bottom: 20px;
 
   &_head-row {
     &:first-child {
@@ -31,8 +32,52 @@
 
 .users-page {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding-top: 30px;
   min-height: 40vh;
-}
+
+  &__posts-btn {
+      display: inline-block;
+      padding: .75rem 1.25rem;
+      border-radius: 10rem;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 1rem;
+      letter-spacing: .15rem;
+      transition: all .3s;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #0cf;
+        border-radius: 10rem;
+        z-index: -2;
+      }
+      &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background-color: darken(#0cf, 15%);
+        transition: all .3s;
+        border-radius: 10rem;
+        z-index: -1;
+      }
+      &:hover {
+        color: #fff;
+        &:before {
+          width: 100%;
+        }
+      }
+    }
+  }
