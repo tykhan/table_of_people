@@ -1,32 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { loadPostsThunk } from '../../redux/actions/postsActions';
 import { loadUsersThunk } from '../../redux/actions/usersActions';
 import { selectors } from '../../redux/reducers/rootReducer';
 import { Loader } from '../Loader/Loader';
 import { Post } from '../UserPosts/UserPosts';
+import './PostsList.scss';
 
-export const PostsList = () => {
+export const PostsList = ({ match }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const users = useSelector(selectors.getUsers);
   const posts = useSelector(selectors.getPosts)
   const loading = useSelector(selectors.getLoading);
   const [selectedUser, setSelectedUser] = useState('0');
 
   useEffect(() => {
-    dispatch(loadPostsThunk());
+    dispatch(loadPostsThunk('0'));
     dispatch(loadUsersThunk());
   }, [dispatch]);
 
-  const filteredPosts = posts.filter(post => {
-    if (selectedUser === '0') {
-      return post;
-    } else {
-      return post.userId.toString() === selectedUser;
-    }
-  });
+  useEffect(() => {
+    dispatch(loadPostsThunk(selectedUser))
+  }, [selectedUser, dispatch]);
 
   return (
     <section className="posts">
@@ -34,24 +32,26 @@ export const PostsList = () => {
         <Loader />
       ) : (
         <>
-          <Link to="/">Go back</Link>
-          <label>
-            Select a user: &nbsp;
-            <select
-              className="user-selector"
-              value={selectedUser}
-              onChange={(e) => {
-                setSelectedUser(e.target.value)
-              }}
-            >
-              <option value={0}>All users</option>
-              {users.map(user =>
-                <option key={user.id} value={user.id}>{user.name}</option>
-              )}
-            </select>
-          </label>
-          <ul>
-            {filteredPosts.map(post =>
+          <div className="posts__top">
+            <Link to="/" className="posts__back-btn">Go back</Link>
+            <label>
+                Select a user: &nbsp;
+              <select
+                className="posts__user-selector"
+                value={selectedUser}
+                onChange={(e) => {
+                  setSelectedUser(e.target.value);
+                }}
+              >
+                <option value={0}>All users</option>
+                {users.map(user =>
+                  <option key={user.id} value={user.id}>{user.name}</option>
+                )}
+              </select>
+            </label>
+          </div>
+          <ul className="posts__list">
+            {posts.map(post =>
               <Post post={post} key={post.id}/>
             )}
           </ul>
