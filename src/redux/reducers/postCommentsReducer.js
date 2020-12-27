@@ -1,11 +1,22 @@
-import { } from '../../_variables/constants';
+import { LOAD_POST_COMMENTS_ERROR, LOAD_POST_COMMENTS_SUCCESS} from '../../_variables/constants';
 
-export const postCommentsReducer = (state = false, action) => {
+const initialState = {
+  error: null,
+  comments: []
+}
+
+export const postCommentsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 12:
-      return true;
-    case 23:
-      return false;
+    case LOAD_POST_COMMENTS_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case LOAD_POST_COMMENTS_SUCCESS:
+      return {
+        ...state,
+        comments: action.payload,
+      };
     default:
       return state;
   }

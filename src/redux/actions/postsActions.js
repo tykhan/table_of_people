@@ -12,20 +12,18 @@ export const postsLoadSuccess = (users) => ({
   payload: users,
 })
 
-export const loadPostsThunk = () => async (dispatch) => {
+export const loadPostsThunk = (userId) => async (dispatch) => {
   dispatch(loadingActions.startLoading());
   try {
-    const posts = await api.getPosts();
-    dispatch(postsLoadSuccess(posts));
+    if (userId === '0') {
+      const posts = await api.getPosts();
+      dispatch(postsLoadSuccess(posts));
+    } else {
+      const posts = await api.getUserPosts(userId);
+      dispatch(postsLoadSuccess(posts))
+    }
   } catch (error) {
     dispatch(postsLoadError(error));
   }
   dispatch(loadingActions.stopLoading());
 }
-
-export const loadUserPostsThunk = (userId) => async(dispatch) => {
-  const userPosts = await api.getUserPosts();
-  return userPosts;
-}
-
-
