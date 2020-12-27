@@ -1,0 +1,30 @@
+@import '../../_design-tokens/mixins.scss';
+@import '../../_design-tokens/variables.scss';
+
+.post-list {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid $bgGreyColor;
+  background-color: $bgGreyColor;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  list-style: none;
+
+  &__title {
+    align-self: center;
+    max-width: 60%;
+  }
+
+  &__details-btn {
+    @include button;
+
+    &:after {
+      background-color: $redColor;
+    }
+  
+    &:before {
+      background-color: $redHoverColor;
+    }
+  }
+}

@@ -1,0 +1,54 @@
+@import '../../_design-tokens/mixins.scss';
+@import '../../_design-tokens/variables.scss';
+
+.users__table {
+  margin-bottom: 20px;
+
+  &_head-row {
+    &:first-child {
+      background: $redColor;
+      color: $whiteColor;
+    }
+  }
+
+  &_head-element,
+  &_row-element {
+    text-align: left;
+    padding: 18px;
+  }
+
+  &__row {
+    background: $whiteColor;
+    color: #474747;
+
+    &:nth-child(2n + 2) {
+      background: $bgGreyColor;
+    }
+
+    :hover {
+      color: #585858;
+      cursor: pointer;
+    }
+  }
+}
+
+.users-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+  min-height: 40vh;
+
+  &__posts-btn {
+    @include button;
+
+    &:after {
+      background-color: $redColor;
+    }
+  
+    &:before {
+      background-color: $redHoverColor;
+    }
+  }
+}

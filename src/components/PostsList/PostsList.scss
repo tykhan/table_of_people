@@ -1,0 +1,38 @@
+@import '../../_design-tokens/mixins.scss';
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  @include container;
+
+  &__user-selector-label {
+    align-self: center;
+  }
+
+  &__back-btn {
+    @include button;
+
+    &:after {
+      background-color: rgba(73, 73, 73, 0.986);
+    }
+  
+    &:before {
+      background-color: rgb(34, 31, 31);
+    }
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__user-selector {
+    height: 30px;
+    border-radius: 5px;
+  }
+
+  &__list {
+    padding-left: 0;
+  }
+}
