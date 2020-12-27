@@ -1,6 +1,6 @@
 # Table of people and posts
 
-Please, see the [https://tykhan.github.io/table_of_people/#/posts](DEMOLIMK)
+Please, see the [DEMOLINK](https://tykhan.github.io/table_of_people)
 
 ## Technolgies used:
 - React
