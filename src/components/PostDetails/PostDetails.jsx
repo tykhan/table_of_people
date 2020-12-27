@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { loadPostCommentsThunk, loadPostThunk } from '../../redux/actions/postDetailsaction';
+import { loadUsersThunk } from '../../redux/actions/usersActions';
 import { selectors } from '../../redux/reducers/rootReducer';
 import { Loader } from '../Loader/Loader';
 import * as api from '../../api/api';
 import './PostDetails.scss';
-import { loadUsersThunk } from '../../redux/actions/usersActions';
 
 export const PostDetails = ({ match }) => {
   const dispatch = useDispatch();
@@ -28,26 +28,29 @@ export const PostDetails = ({ match }) => {
   }, [dispatch, postId]);
 
   const deleteHandler = (id) => {
-    const postToDelete = api.deletePost(id)
-      .then(post => console.log(post));
-    console.log(postToDelete);
+    api.deletePost(id);
+    window.alert('Post was succesfully deleted')
   }
 
   const saveChangesHandler = (e) => {
     e.preventDefault();
-    if (!newTitle || !newText) {
-      window.alert('Enter new title and post text before submitting')
-      return;
-    }
+
     const newPostValues = {
       title: newTitle,
       body: newText,
       userId: post.userId
     }
+    api.editPost(postId, newPostValues).then(post => {
+      window.alert(`Post succesfully changed
+        Title: ${post.title}
+        Text: ${post.body}
+      `)
+    });
 
-    api.editPost(postId, newPostValues).then(post => console.log(post));
+    setNewText('');
+    setNewTitle('');
   }
-
+  
   return (
     <section className="details-section">
       {isLoading ? (
@@ -75,34 +78,39 @@ export const PostDetails = ({ match }) => {
                 className="post__edit-form"
                 onSubmit={saveChangesHandler}
               >
-                <div className="post-edit">Editing</div>
+                <div className="post-edit">Edit post</div>
                 <input
+                  placeholder="Enter new title..."
                   value={newTitle}
                   type="text"
                   className="post__edit__title"
+                  required
                   onChange={(e) => setNewTitle(e.target.value.trimLeft())}
                 />
-                <input
+                <textarea
+                  placeholder="Enter new text..."
                   value={newText}
                   type="text"
                   className="post__edit__body"
+                  rows="3"
+                  required
                   onChange={(e) => setNewText(e.target.value.trimLeft())}
                 />
                 <button
                   type="submit"
                   className="post__save-btn"
                 >
-                  Save
+                  Save changes
                 </button>
-              </form>
-              <Link to="/posts">
-                <button
+                <Link
+                  to="/posts"
                   className="post__delete-btn"
                   onClick={() => deleteHandler(postId)}
                 >
                   Delete post
-                </button>
-              </Link>
+                </Link>
+              </form>
+              
             </div>
           </div>
         </>

@@ -5,15 +5,19 @@
   flex-direction: column;
   @include container;
 
+  &__user-selector-label {
+    align-self: center;
+  }
+
   &__back-btn {
     @include button;
 
     &:after {
-      background-color: rgb(20, 16, 16);
+      background-color: rgba(73, 73, 73, 0.986);
     }
   
     &:before {
-      background-color: rgba(73, 62, 62, 0.842);
+      background-color: rgb(34, 31, 31);
     }
   }
 

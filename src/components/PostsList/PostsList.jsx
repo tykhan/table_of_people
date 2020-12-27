@@ -6,7 +6,7 @@ import { loadPostsThunk } from '../../redux/actions/postsActions';
 import { loadUsersThunk } from '../../redux/actions/usersActions';
 import { selectors } from '../../redux/reducers/rootReducer';
 import { Loader } from '../Loader/Loader';
-import { Post } from '../UserPosts/UserPosts';
+import { UserPost } from '../UserPosts/UserPost';
 import './PostsList.scss';
 
 export const PostsList = ({ match }) => {
@@ -34,7 +34,7 @@ export const PostsList = ({ match }) => {
         <>
           <div className="posts__top">
             <Link to="/" className="posts__back-btn">Go back</Link>
-            <label>
+            <label className="posts__user-selector-label">
                 Select a user: &nbsp;
               <select
                 className="posts__user-selector"
@@ -52,7 +52,7 @@ export const PostsList = ({ match }) => {
           </div>
           <ul className="posts__list">
             {posts.map(post =>
-              <Post post={post} key={post.id}/>
+              <UserPost post={post} key={post.id}/>
             )}
           </ul>
         </>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './UserPosts.scss';
 
-export const Post = ({ post }) => {
+export const UserPost = ({ post }) => {
 
   return (
     <>
