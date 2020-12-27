@@ -1,21 +1,21 @@
 @import './variables.scss';
 
-@mixin lightText() {
+@mixin lightText {
   font-weight: 300;
   font-size: 13px;
 }
 
-@mixin normalText() {
+@mixin normalText {
   font-weight: 400;
   font-size: 14px;
 }
 
-@mixin boldText600() {
+@mixin boldText600 {
   font-weight: 600;
   font-size: 16px;
 }
 
-@mixin boldText700() {
+@mixin boldText700 {
   font-weight: bold;
   font-size: 18px;
 }
