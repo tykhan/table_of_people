@@ -11,13 +11,23 @@
   margin-bottom: 5px;
   list-style: none;
 
+  &__item {
+    max-width: 60%;
+  }
+
   &__title {
     align-self: center;
-    max-width: 60%;
+    @include boldText600;
+  }
+
+  &__author {
+    @include normalText;
   }
 
   &__details-btn {
     @include button;
+    max-height: 15px;
+    align-self: center;
 
     &:after {
       background-color: $redColor;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { loadPostsThunk } from '../../redux/actions/postsActions';
 import { loadUsersThunk } from '../../redux/actions/usersActions';
@@ -11,7 +11,6 @@ import './PostsList.scss';
 
 export const PostsList = ({ match }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const users = useSelector(selectors.getUsers);
   const posts = useSelector(selectors.getPosts)
   const loading = useSelector(selectors.getLoading);
@@ -52,7 +51,7 @@ export const PostsList = ({ match }) => {
           </div>
           <ul className="posts__list">
             {posts.map(post =>
-              <UserPost post={post} key={post.id}/>
+              <UserPost post={post} users={users} key={post.id}/>
             )}
           </ul>
         </>

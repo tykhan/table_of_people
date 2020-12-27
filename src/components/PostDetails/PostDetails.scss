@@ -58,7 +58,8 @@
     &__title {
       @include normalText;
       margin-bottom: $marginBottom;
-      width: 98%;
+      width: 99%;
+      height: 20px;
       border: 1px solid grey;
       border-radius: $borderRadius;
     }
