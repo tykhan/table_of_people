@@ -37,7 +37,9 @@ const putMethod = (url, data) => {
 
 export const getUsers = () => request('/users');
 export const getUserPosts = (userId) => request(`/posts?userId=${userId}`);
-export const getPostComments = (postId) => request(`/comments?${postId}`);
-export const editPost = (postId) => putMethod(`/posts/${postId}`);
-export const addNewPost = (data) => postMethod('/posts');
+export const getPosts = () => request('/posts');
+export const getPostDetails = (postId) => request(`/posts/${postId}`);
+export const getPostComments = (postId) => request(`/comments?postId=${postId}`);
+export const editPost = (postId, data) => putMethod(`/posts/${postId}`, data);
+export const addNewPost = (data) => postMethod('/posts', data);
 export const deletePost = (postId) => deleteMethod(`/posts/${postId}`);
