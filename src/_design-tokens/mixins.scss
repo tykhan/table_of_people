@@ -1,5 +1,6 @@
 @import './variables.scss';
 
+// fonts
 @mixin lightText {
   font-weight: 300;
   font-size: 13px;
@@ -20,6 +21,7 @@
   font-size: 18px;
 }
 
+// basic styles for all buttons
 @mixin button {
   @include boldText600;
   display: flex;
@@ -67,6 +69,7 @@
   }
 }
 
+// container with @media queries for tables
 @mixin container {
   width: 900px;
   margin: 0 auto;

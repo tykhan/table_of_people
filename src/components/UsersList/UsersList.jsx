@@ -8,9 +8,9 @@ import { Loader } from '../Loader/Loader';
 import { User } from '../User/User';
 
 export const Users = () => {
+  const dispatch = useDispatch();
   const users = useSelector(selectors.getUsers);
   const loading = useSelector(selectors.getLoading);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadUsersThunk());

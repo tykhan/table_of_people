@@ -11,9 +11,11 @@ import './PostsList.scss';
 
 export const PostsList = ({ match }) => {
   const dispatch = useDispatch();
+
   const users = useSelector(selectors.getUsers);
   const posts = useSelector(selectors.getPosts)
   const loading = useSelector(selectors.getLoading);
+
   const [selectedUser, setSelectedUser] = useState('0');
 
   useEffect(() => {

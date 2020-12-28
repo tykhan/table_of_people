@@ -1,5 +1,6 @@
 const BASE_URL = 'https://jsonplaceholder.typicode.com';
 
+// general requests handler
 const request = (endpoint, options) => {
   return fetch(`${BASE_URL}${endpoint}`, options)
     .then(response => {
