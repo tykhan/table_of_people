@@ -11,25 +11,28 @@ import './PostDetails.scss';
 
 export const PostDetails = ({ match }) => {
   const dispatch = useDispatch();
+
   const comments = useSelector(selectors.getPostComments);
   const post = useSelector(selectors.getPostDetails);
   const isLoading = useSelector(selectors.getLoading);
   const users = useSelector(selectors.getUsers);
+
   const [newTitle, setNewTitle] = useState('');
   const [newText, setNewText] = useState('');
 
   const postId = +match.params.postId;
   const postAuthor = users.find(user => +user.id === +post.userId);
 
-  useEffect(() => {
+  // needed loading all again for properly work after page reload
+  useEffect(() => { 
     dispatch(loadPostCommentsThunk(postId));
     dispatch(loadPostThunk(postId));
     dispatch(loadUsersThunk());
   }, [dispatch, postId]);
 
   const deleteHandler = (id) => {
-    api.deletePost(id);
-    window.alert('Post was succesfully deleted')
+    api.deletePost(id)
+      .then(() => window.alert('Post was succesfully deleted'));
   }
 
   const saveChangesHandler = (e) => {
@@ -40,11 +43,12 @@ export const PostDetails = ({ match }) => {
       body: newText,
       userId: post.userId
     }
-    api.editPost(postId, newPostValues).then(post => {
-      window.alert(`Post succesfully changed
-        Title: ${post.title}
-        Text: ${post.body}
-      `)
+    api.editPost(postId, newPostValues)
+      .then(post => {
+        window.alert(`Post succesfully changed
+          Title: ${post.title}
+          Text: ${post.body}
+        `)
     });
 
     setNewText('');
@@ -64,13 +68,12 @@ export const PostDetails = ({ match }) => {
             {postAuthor && <div className="post__author">Author: {postAuthor.name}</div>}
             <ul className="post__comments-list">
               <span className="post__comments">Comments: </span>
-              {comments.map(comment => {
-                return (
-                  <li key={comment.id} className="post__comments__comment comment">
-                    <div className="comment__name">{comment.name}</div>
-                    <div className="comment__body">{comment.body}</div>
-                  </li>)
-              })}
+              {comments.map(comment => (
+                <li key={comment.id} className="post__comments__comment comment">
+                  <div className="comment__name">{comment.name}</div>
+                  <div className="comment__body">{comment.body}</div>
+                </li>
+              ))}
             </ul>
             <div className="post__bottom">
               <form
