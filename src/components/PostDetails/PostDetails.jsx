@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -20,11 +20,16 @@ export const PostDetails = ({ match }) => {
   const [newTitle, setNewTitle] = useState('');
   const [newText, setNewText] = useState('');
 
-  const postId = +match.params.postId;
-  const postAuthor = users.find(user => +user.id === +post.userId);
+  const postId = useMemo(() =>
+    +match.params.postId
+  , [match.params.postId]);
+  
+  const postAuthor = useMemo(() =>
+    users.find(user => +user.id === +post.userId)
+  , [post.userId, users]);
 
   // needed loading all again for properly work after page reload
-  useEffect(() => { 
+  useEffect(() => {
     dispatch(loadPostCommentsThunk(postId));
     dispatch(loadPostThunk(postId));
     dispatch(loadUsersThunk());

@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import './UserPosts.scss';
 
 export const UserPost = ({ post, users }) => {
-  const author = users.find(user => user.id === post.userId);
+  
+  const author = useMemo(() =>
+    users.find(user => user.id === post.userId)
+  , [post.userId, users]);
 
   return (
     <li className="posts__list_item post-list">
