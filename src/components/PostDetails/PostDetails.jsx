@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -35,10 +35,10 @@ export const PostDetails = ({ match }) => {
     dispatch(loadUsersThunk());
   }, [dispatch, postId]);
 
-  const deleteHandler = (id) => {
+  const deleteHandler = useCallback((id) => {
     api.deletePost(id)
       .then(() => window.alert('Post was succesfully deleted'));
-  }
+  }, []);
 
   const saveChangesHandler = (e) => {
     e.preventDefault();
